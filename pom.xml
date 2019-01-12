@@ -11,8 +11,8 @@
   <modules>
     <module>sc-registry</module>
     <module>sc-gateway</module>
-    <module>sc-item</module>
     <module>sc-common</module>
+    <module>sc-item</module>
   </modules>
   <packaging>pom</packaging>
 
@@ -77,14 +77,14 @@
     </dependency>
   </dependencies>
 
-  <build>
+  <!--<build>
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
       </plugin>
     </plugins>
-  </build>
+  </build>-->
 
 
 </project>

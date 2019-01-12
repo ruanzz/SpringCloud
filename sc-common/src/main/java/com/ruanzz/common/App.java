@@ -5,7 +5,7 @@ package com.ruanzz.common;
  * @date 2019/1/11
  * @description TODO
  */
-public class Main {
+public class App {
 
   public static void main(String[] args) {
 
