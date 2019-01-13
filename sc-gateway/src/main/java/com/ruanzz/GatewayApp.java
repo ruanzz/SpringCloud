@@ -3,6 +3,7 @@ package com.ruanzz;
 import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * @author ruanzz
@@ -11,6 +12,7 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
  */
 @SpringCloudApplication
 @EnableZuulProxy
+@EnableSwagger2
 public class GatewayApp {
 
   public static void main(String[] args) {
