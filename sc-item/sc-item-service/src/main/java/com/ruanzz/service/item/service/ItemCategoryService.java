@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 /**
  * @author ruanzz
  * @date 2019/1/13
- * @description TODO
+ * @description 商品分类Service
  */
 @Service
 public class ItemCategoryService {
@@ -19,8 +19,7 @@ public class ItemCategoryService {
 
   public List<ItemCategory> queryCategoryListByParentId(Long parentId) {
     ItemCategory category = new ItemCategory();
-    category.setParentId(parentId);
-    System.out.println(itemCategoryMapper);
+    category.setParentId(1L);
     return itemCategoryMapper.select(category);
   }
 }

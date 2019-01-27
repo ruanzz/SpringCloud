@@ -25,3 +25,7 @@ spring:
       additional-paths: src/main/java
 logging:
   config: classpath:logback.xml
+# 控制台打印SQL语句
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

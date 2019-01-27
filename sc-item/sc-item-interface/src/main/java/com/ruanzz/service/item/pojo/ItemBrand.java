@@ -8,24 +8,22 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Data;
 
-
 /**
  * @author ruanzz
- * @date 2019/1/13
- * @description 商品分类
+ * @date 2019/1/27
+ * @description 商品描述
  */
-@Data
 @Entity
-@Table(name = "ITEM_CATEGORY")
-public class ItemCategory {
+@Table(name = "ITEM_BRAND")
+@Data
+public class ItemBrand {
 
   @Id
   @Column(name = "ID_")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(name = "PARENT_ID_")
-  private Long parentId;
-
+  @Column(name = "NAME_")
+  private String name;
 
 }
