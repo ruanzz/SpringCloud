@@ -2,7 +2,6 @@ package com.ruanzz.service.item.service;
 
 import com.ruanzz.common.vo.PageResult;
 import com.ruanzz.service.item.pojo.ItemBrand;
-import java.util.Map;
 
 /**
  * @author ruanzz
@@ -11,5 +10,9 @@ import java.util.Map;
  */
 public interface ItemBrandService {
 
-  public PageResult<ItemBrand> queryBrandByParam(Map<String, Object> param);
+  /**
+   * 查询品牌
+   */
+  PageResult<ItemBrand> queryBrandByPage(Integer page, Integer rows, String sortBy, boolean desc,
+      String key);
 }

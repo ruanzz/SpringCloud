@@ -1,23 +1,23 @@
 package com.ruanzz.service.item.controller;
 
-import com.ruanzz.common.utils.MapUtil;
 import com.ruanzz.common.vo.PageResult;
 import com.ruanzz.service.item.pojo.ItemBrand;
 import com.ruanzz.service.item.service.ItemBrandService;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import javax.servlet.http.HttpServletRequest;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author ruanzz
  * @date 2019/1/27
- * @description TODO
+ * @description 商品品牌REST入口
  */
+@Api(value = "/brand", tags = "商品品牌模块")
 @RestController
 @RequestMapping("brand")
 public class BrandController {
@@ -25,20 +25,16 @@ public class BrandController {
   @Autowired
   private ItemBrandService itemBrandService;
 
-  public ResponseEntity<PageResult<ItemBrand>> queryBrandByParam(HttpServletRequest request) {
 
-    Map<String, String[]> map = request.getParameterMap();
-    Map<String, Object> param = new HashMap<>();
-    Integer page = (Integer) MapUtil.getValue(param, "page");
-    if (Objects.isNull(page)) {
-      page = 1;
-    }
-    param.put("page", page);
-    Integer rows = (Integer) MapUtil.getValue(param, "rows");
-    if (Objects.isNull(rows)) {
-      rows = 5;
-    }
-    param.put("rows", rows);
-    return ResponseEntity.ok(itemBrandService.queryBrandByParam(param));
+  @ApiOperation(value = "获取商品品牌列表", notes = "支持分页查询，支持名称模糊查询")
+  @GetMapping("/list")
+  public ResponseEntity<PageResult<ItemBrand>> queryBrandByPage(
+      @RequestParam(value = "page", defaultValue = "1") Integer page,
+      @RequestParam(value = "rows", defaultValue = "5") Integer rows,
+      @RequestParam(value = "sortBy", required = false) String sortBy,
+      @RequestParam(value = "desc", defaultValue = "false") boolean desc,
+      @RequestParam(value = "key", required = false) String key
+  ) {
+    return ResponseEntity.ok(itemBrandService.queryBrandByPage(page, rows, sortBy, desc, key));
   }
 }
