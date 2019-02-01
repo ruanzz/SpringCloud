@@ -1,6 +1,6 @@
 package com.ruanzz.common.advice;
 
-import com.ruanzz.common.exception.BaseException;
+import com.ruanzz.common.exception.AppException;
 import com.ruanzz.common.vo.ResponeResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class BaseExceptionHandler {
 
-  @ExceptionHandler(BaseException.class)
-  public ResponseEntity<ResponeResult> handleException(BaseException exception) {
+  @ExceptionHandler(AppException.class)
+  public ResponseEntity<ResponeResult> handleException(AppException exception) {
     return ResponseEntity.status(exception.getExceptionEnum().getStatus())
         .body(new ResponeResult(exception.getExceptionEnum()));
   }

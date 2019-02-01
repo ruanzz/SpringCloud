@@ -13,8 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Getter
 public enum ExceptionEnum {
-  GOODS_SAVE_PRICE_NOT_NULL(400, "商品价格不能为空！"),
-  GOODS_SAVE_ERROR(500, "保存商品失败");
+  BRAND_SAVE_ERROR(500, "保存商品品牌失败");
   int status;
   String msg;
 }

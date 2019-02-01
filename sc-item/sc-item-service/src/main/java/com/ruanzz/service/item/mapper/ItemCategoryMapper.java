@@ -10,5 +10,4 @@ import tk.mybatis.mapper.common.Mapper;
  */
 public interface ItemCategoryMapper extends Mapper<ItemCategory> {
 
-
 }

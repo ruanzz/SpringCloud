@@ -13,6 +13,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class BaseException extends RuntimeException {
+public class AppException extends RuntimeException {
   private ExceptionEnum exceptionEnum;
 }
