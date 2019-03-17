@@ -13,6 +13,7 @@
     <module>sc-gateway</module>
     <module>sc-common</module>
     <module>sc-item</module>
+    <module>sc-elasticsearch</module>
   </modules>
   <packaging>pom</packaging>
 

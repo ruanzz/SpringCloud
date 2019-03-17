@@ -7,4 +7,4 @@ cache:
   directories:
   - '$HOME/.m2/repository'
 
-script: "./mvnw clean install"
+script: "./mvnw clean install -DskipTest=true"
