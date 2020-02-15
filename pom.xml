@@ -8,13 +8,6 @@
   <groupId>com.ruanzz</groupId>
   <artifactId>sc</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <modules>
-    <module>sc-registry</module>
-    <module>sc-gateway</module>
-    <module>sc-common</module>
-    <module>sc-item</module>
-    <module>sc-elasticsearch</module>
-  </modules>
   <packaging>pom</packaging>
 
   <name>sc</name>

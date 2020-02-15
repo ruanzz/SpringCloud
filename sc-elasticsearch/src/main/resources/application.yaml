@@ -1,9 +1,0 @@
-server:
-  port: 8083
-spring:
-  application:
-    name: sc-elasticsearch
-  data:
-    elasticsearch:
-      cluster-name: elasticsearch
-      cluster-nodes: localhost:9300
