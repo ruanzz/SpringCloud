@@ -1,18 +1,18 @@
 package com.ruanzz;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
 /**
  * @author Zhenzhuo.Ruan
  */
 @SpringBootApplication
-@EnableEurekaServer
-public class RegistryBootstrap {
+@MapperScan("com.ruanzz.mapper")
+public class DemoApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(RegistryBootstrap.class, args);
+    SpringApplication.run(DemoApplication.class, args);
   }
 
 }

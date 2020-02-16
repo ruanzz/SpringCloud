@@ -12,6 +12,9 @@
     <!-- 注册中心 -->
     <module>registry/service</module>
     <module>demo/service</module>
+    <module>starter/web</module>
+    <module>starter/service</module>
+    <module>configserver/service</module>
   </modules>
   <packaging>pom</packaging>
 
@@ -29,7 +32,11 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>1.8</java.version>
     <spring-cloud.version>Finchley.SR1</spring-cloud.version>
+    <mybatis-plus.version>3.1.1</mybatis-plus.version>
+    <druid.version>1.1.10</druid.version>
     <mysql.version>5.1.32</mysql.version>
+    <flyway.version>5.2.4</flyway.version>
+    <lombok.verion>1.18.8</lombok.verion>
     <swagger.version>2.7.0</swagger.version>
   </properties>
 
@@ -42,12 +49,43 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-      <!-- mysql驱动 -->
+
+      <!-- MyBatis-plus -->
+      <dependency>
+        <groupId>com.baomidou</groupId>
+        <artifactId>mybatis-plus-boot-starter</artifactId>
+        <version>${mybatis-plus.version}</version>
+      </dependency>
+
+      <!-- Druid 连接池 -->
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>druid-spring-boot-starter</artifactId>
+        <version>${druid.version}</version>
+      </dependency>
+
+      <!-- MySQL 驱动 -->
       <dependency>
         <groupId>mysql</groupId>
         <artifactId>mysql-connector-java</artifactId>
         <version>${mysql.version}</version>
       </dependency>
+
+      <!-- Flyway -->
+      <dependency>
+        <groupId>org.flywaydb</groupId>
+        <artifactId>flyway-core</artifactId>
+        <version>${flyway.version}</version>
+      </dependency>
+
+      <!-- lombok -->
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>${lombok.verion}</version>
+      </dependency>
+
+      <!-- Swagger -->
       <dependency>
         <groupId>io.springfox</groupId>
         <artifactId>springfox-swagger2</artifactId>
