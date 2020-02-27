@@ -1,0 +1,9 @@
+---
+- name: System init
+  gather_facts: false
+  hosts:
+  - k8s
+  - etcd
+  roles:
+  - common
+  tags: common
