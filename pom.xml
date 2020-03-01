@@ -17,6 +17,9 @@
     <module>configserver/service</module>
     <module>scheduler/service</module>
     <module>scheduler/rest-bean</module>
+    <module>gateway/service</module>
+    <module>auth/service</module>
+    <module>auth/rest-bean</module>
   </modules>
   <packaging>pom</packaging>
 
