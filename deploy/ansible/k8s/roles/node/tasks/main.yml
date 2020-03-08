@@ -1,0 +1,67 @@
+---
+- name: Create work dir
+  file: dest={{ k8s_work_dir }}/{{ item }} state=directory
+  with_items:
+  - bin
+  - cfg
+  - ssl
+  - logs
+
+- name: Create cni plugin dir
+  file: dest={{ item }} state=directory
+  with_items:
+  - /opt/cni/bin
+  - /etc/cni/net.d
+
+- name: Create tmp dir
+  file: dest={{ tmp_dir }} state=directory
+
+- name: Copy kubernetes-*.tar.gz and unarchive
+  unarchive: src={{ item }} dest={{ tmp_dir }}
+  with_fileglob:
+  - "{{ software_dir }}/kubernetes-*.tar.gz"
+
+- name: Move kubernetes Install file
+  shell: cp -rf {{ tmp_dir }}/kubernetes/server/bin/{kubelet,kube-proxy} {{ k8s_work_dir }}/bin
+
+- name: Copy cni-plugins-*.tgz and unarchive
+  unarchive: src={{ item }} dest=/opt/cni/bin
+  with_fileglob:
+  - "{{ software_dir }}/cni-plugins-*.tgz"
+
+- name: Copy kubernetes cert file
+  copy: src=k8s_cert/{{ item }} dest={{ k8s_work_dir }}/ssl
+  with_items:
+  - ca.pem
+  - kube-proxy.pem
+  - kube-proxy-key.pem
+
+- name: Copy kubernetes config file
+  template: src={{ item }} dest={{ k8s_work_dir }}/cfg/{{ item.split('.')[:-1]|join('.') }}
+  with_items:
+  - bootstrap.kubeconfig.j2
+  - kubelet.conf.j2
+  - kubelet-config.yml.j2
+  - kube-proxy.kubeconfig.j2
+  - kube-proxy.conf.j2
+  - kube-proxy-config.yml.j2
+
+- name: Config kubelet and kube-proxy systemd
+  template: src={{ item }} dest=/usr/lib/systemd/system/{{ item.split('.')[:-1]|join('.') }}
+  with_items:
+  - kubelet.service.j2
+  - kube-proxy.service.j2
+
+- name: Start kubelet and kube-proxy
+  systemd: name={{ item }} state=restarted enabled=yes daemon_reload=yes
+  with_items:
+  - kubelet
+  - kube-proxy
+
+- name: Copy image
+  copy: src={{ software_dir }}/images.tar dest={{ tmp_dir }}
+
+- name: Load image
+  shell: cd {{ tmp_dir }} && \
+    docker load < images.tar
+

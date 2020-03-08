@@ -7,3 +7,45 @@
   roles:
   - common
   tags: common
+
+- name: CA
+  gather_facts: false
+  hosts: localhost
+  roles:
+  - tls
+  tags: tls
+
+- name: Deploy Docker
+  gather_facts: false
+  hosts: k8s
+  roles:
+  - docker
+  tags: docker
+
+- name: Deploy etcd cluster
+  gather_facts: false
+  hosts: etcd
+  roles:
+  - etcd
+  tags: etcd
+
+- name: Deploy K8s master
+  gather_facts: false
+  hosts: master
+  roles:
+  - master
+  tags: master
+
+- name: Deploy K8s Node
+  gather_facts: false
+  hosts: k8s
+  roles:
+  - node
+  tags: node
+
+- name: Deploy Addons
+  gather_facts: false
+  hosts: master
+  roles:
+  - addons
+  tags: addons

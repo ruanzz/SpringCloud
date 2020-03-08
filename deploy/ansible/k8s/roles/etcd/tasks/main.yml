@@ -1,0 +1,42 @@
+---
+- name: Create work dir
+  file: dest={{ etcd_work_dir }}/{{ item }} state=directory
+  with_items:
+  - bin
+  - cfg
+  - ssl
+
+- name: Create tmp dir
+  file: dest={{ tmp_dir }} state=directory
+
+- name: Copy etcd-v*.tar.gz to etcd node and unarchive
+  unarchive: src={{ item }} dest={{ tmp_dir }}
+  with_fileglob:
+  - "{{ software_dir }}/etcd-v*.tar.gz"
+
+- name: Move etcd install file
+  shell: cp -rf {{ tmp_dir }}/etcd-v*/{etcd,etcdctl} {{ etcd_work_dir }}/bin
+
+- name: Copy cert file
+  copy: src=etcd_cert/{{ item }} dest={{ etcd_work_dir }}/ssl
+  with_items:
+  - ca.pem
+  - server.pem
+  - server-key.pem
+
+- name: Copy etcd.conf
+  template: src=etcd.conf.j2 dest={{ etcd_work_dir }}/cfg/etcd.conf
+
+- name: Config etcd systemd
+  template: src=etcd.service.j2 dest=/usr/lib/systemd/system/etcd.service
+
+- name: Start etcd
+  systemd: name=etcd state=restarted enabled=yes daemon_reload=yes
+
+- name: Copy etcd_status_check.sh
+  template: src=etcd_status_check.sh.j2 dest={{ tmp_dir }}/etcd_status_check.sh mode=u+x
+
+- name: Execute etcd_status_check.sh
+  shell: /bin/bash {{ tmp_dir }}/etcd_status_check.sh
+  register: status
+- debug: var=status.stdout_lines

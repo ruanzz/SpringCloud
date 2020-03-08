@@ -1,0 +1,28 @@
+---
+- name: Create tmp dir
+  file: dest={{ tmp_dir }} state=directory
+
+- name: Copy docker-*.tgz to all node and unarchive
+  unarchive: src={{ item }} dest={{ tmp_dir }}
+  with_fileglob:
+  - "{{ software_dir }}/docker-*.tgz"
+
+- name: Move docker install file
+  shell: cp -rf {{ tmp_dir }}/docker/* /usr/bin
+
+- name: Config docker systemd
+  copy: src=docker.service dest=/usr/lib/systemd/system/
+
+- name: Create docker config dir
+  file: dest=/etc/docker state=directory
+
+- name: Config docker daemon.json
+  copy: src=daemon.json dest=/etc/docker/daemon.json
+
+- name: Start docker
+  systemd: name=docker state=restarted enabled=yes daemon_reload=yes
+
+- name: Printf docker info
+  shell: docker info
+  register: docker
+- debug: var=docker.stdout_lines

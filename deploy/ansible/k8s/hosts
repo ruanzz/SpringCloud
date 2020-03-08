@@ -1,0 +1,16 @@
+[master]
+192.168.56.10 node_name=master
+
+[node]
+192.168.56.11 node_name=worker1
+192.168.56.12 node_name=worker2
+
+[etcd]
+192.168.56.10 etcd_name=etcd-1
+192.168.56.11 etcd_name=etcd-2
+192.168.56.12 etcd_name=etcd-3
+
+[k8s:children]
+master
+node
+

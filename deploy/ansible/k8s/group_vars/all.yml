@@ -1,0 +1,27 @@
+# Install workdir
+software_dir: '/root/k8s/pkg'
+k8s_work_dir: '/opt/kubernetes'
+etcd_work_dir: '/opt/etcd'
+tmp_dir: '/tmp/k8s'
+
+# Cluster network
+service_cidr: '10.0.0.0/24'
+cluster_dns: '10.0.0.2'   # 与roles/addons/files/coredns.yaml中IP一致，并且是service_cidr中的IP
+pod_cidr: '10.244.0.0/16' # 与roles/addons/files/kube-flannel.yaml中网段一致
+service_nodeport_range: '30000-32767'
+cluster_domain: 'cluster.local'
+
+
+# CA trust ip list
+cert_hosts:
+  # Include master ip and first ip of service_cidr
+  k8s:
+  - 10.0.0.1
+  - 192.168.56.10
+  - 192.168.56.11
+  - 192.168.56.12
+  # Include etcd node ip
+  etcd:
+  - 192.168.56.10
+  - 192.168.56.11
+  - 192.168.56.12

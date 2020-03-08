@@ -33,3 +33,6 @@ target/
 *.iml
 *.ipr
 log
+
+#### k8s ###
+/deploy/ansible/k8s/pkg/
