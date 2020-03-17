@@ -3,7 +3,7 @@ package com.ruanzz;
 /**
  * @author Zhenzhuo.Ruan
  */
-public class VmVO extends VirtualResourceVO {
+public class VmVO extends AbstractResourceVO {
 
   private Integer vcpu;
   private Integer memory;
@@ -50,5 +50,16 @@ public class VmVO extends VirtualResourceVO {
 
   public void setStoragePoolId(String storagePoolId) {
     this.storagePoolId = storagePoolId;
+  }
+
+  @Override
+  public String toString() {
+    return "VmVO{" +
+        "vcpu=" + vcpu +
+        ", memory=" + memory +
+        ", storage=" + storage +
+        ", hostId='" + hostId + '\'' +
+        ", storagePoolId='" + storagePoolId + '\'' +
+        '}';
   }
 }

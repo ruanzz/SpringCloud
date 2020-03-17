@@ -1,13 +1,13 @@
 package com.ruanzz.strategy;
 
-import com.ruanzz.VirtualResourceVO;
+import com.ruanzz.AbstractResourceVO;
 import com.ruanzz.bean.BaseBean;
 import java.util.List;
 
 /**
  * @author Zhenzhuo.Ruan
  */
-public abstract class AbstractStrategy<V extends VirtualResourceVO, R extends BaseBean> implements
+public abstract class AbstractStrategy<V extends AbstractResourceVO, R extends BaseBean> implements
     Strategy {
 
   protected V virtualResource;

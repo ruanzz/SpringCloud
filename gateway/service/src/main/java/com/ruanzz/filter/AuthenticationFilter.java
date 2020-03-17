@@ -19,6 +19,7 @@ import org.springframework.stereotype.Component;
 public class AuthenticationFilter extends ZuulFilter {
 
   private static final Logger LOG = LoggerFactory.getLogger(AuthenticationFilter.class);
+  private static final String PREFIX_URI = "/auth";
 
   private static String AUTH_PREFIX = "bearer ";
 
@@ -42,7 +43,7 @@ public class AuthenticationFilter extends ZuulFilter {
 
     RequestContext requestContext = RequestContext.getCurrentContext();
     HttpServletRequest request = requestContext.getRequest();
-    if (StringUtils.startsWith(request.getRequestURI(), "/auth")) {
+    if (StringUtils.startsWith(request.getRequestURI(), PREFIX_URI)) {
       return null;
     }
 

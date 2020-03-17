@@ -1,6 +1,6 @@
 package com.ruanzz.scheduler;
 
-import com.ruanzz.VirtualResourceVO;
+import com.ruanzz.AbstractResourceVO;
 import com.ruanzz.bean.Operator;
 import com.ruanzz.lister.FilterEvent;
 import com.ruanzz.lister.FilterEvent.FilterType;
@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 /**
  * @author Zhenzhuo.Ruan
  */
-public abstract class AbstractScheduler<R extends VirtualResourceVO> implements
+public abstract class AbstractScheduler<R extends AbstractResourceVO> implements
     Scheduler {
 
   protected List<R> virtualResourceList;
@@ -34,6 +34,9 @@ public abstract class AbstractScheduler<R extends VirtualResourceVO> implements
     return this.virtualResourceList;
   }
 
+  /**
+   * 添加过滤类型和评分算子
+   */
   protected abstract void addFilterTypeAndOperator(Map<FilterType, Operator> filterTypeOperatorMap);
 
   protected void filter() {
@@ -47,8 +50,15 @@ public abstract class AbstractScheduler<R extends VirtualResourceVO> implements
     ApplicationContextUtil.getApplicationContext().publishEvent(filterEvent);
   }
 
+  /**
+   * 寻找资源落点
+   */
   protected abstract void lookup();
 
+  /**
+   * 验证资源落点是否正确
+   * @return
+   */
   protected abstract boolean verify();
 
 

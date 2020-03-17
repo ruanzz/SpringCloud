@@ -3,7 +3,7 @@ package com.ruanzz;
 /**
  * @author Zhenzhuo.Ruan
  */
-public abstract class VirtualResourceVO {
+public abstract class AbstractResourceVO {
 
   protected String uuid;
   protected String regionUuid;

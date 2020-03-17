@@ -5,6 +5,9 @@ package com.ruanzz.strategy;
  */
 public interface Strategy {
 
+  /**
+   * 寻找资源落点
+   */
   boolean lookup();
 
 }

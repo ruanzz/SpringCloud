@@ -5,4 +5,8 @@ package com.ruanzz.auth;
  */
 public class UserInfoVO {
 
+  @Override
+  public String toString() {
+    return "UserInfoVO{}";
+  }
 }
